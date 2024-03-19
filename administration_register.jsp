@@ -95,38 +95,18 @@
 
                         <div class="form-input">
                             <select name="dept" id="dept" required>
-							<option value=""> Select degree </option>
+							<option value=""> Select Department </option>
                             <option value="Water">Water </option>
                             <option value="Drainage">Drainage </option>
                             <option value="Road">Road</option>
                             <option value="Electricity">Electricity </option>
                             <option value="Garbage">Garbage </option>
-                            <option value="Street Lights">Street Lights</option>
 					
 
 						</select>
                         </div>
                         
-                            <!-- <div class="form-input">
-                                <select name="course" required>
-							<option value=""> Select course </option>
-                            <option value="MBBS">MBBS </option>
-                            <option value="ortho">MD ortho </option>
-                            <option value="cardio">MD cardio </option>
-                            <option value="neuro">MD neuro </option>
-                            <option value="gyno">MD gyno </option>
-                            
-
-						</select>
-                            </div> -->
-                            <!-- <div class="form-input">
-                                <select name="year" required>
-							<option value=""> Select year </option>
-							<option value="1"> 1 </option>
-							<option value="2"> 2 </option>
-
-						</select>
-                            </div> -->
+                          
                             
                             
                                 <div class="form-input pt-30">

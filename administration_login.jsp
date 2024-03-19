@@ -79,8 +79,8 @@
 			out.println(session.getAttribute("administrationErrorLogin"));
 		}
 		if(session.getAttribute("Rejected") != null)
-		{
-			out.println(session.getAttribute("Rejected"));
+		{	
+            out.println(session.getAttribute("Rejected"));
 		}
 */
 %>
@@ -123,6 +123,7 @@
 		{
 			// if request is not yet accepted by Admin
 		session.setAttribute("administration",rs.getString(1));
+        session.setAttribute("dept",rs.getString("dept"));
 				response.sendRedirect("administration_dashboard.jsp");
 			
 		}

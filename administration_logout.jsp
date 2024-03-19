@@ -3,6 +3,7 @@
 
     <%
 	session.removeAttribute("administration");					// destroy session of user
+    session.removeAttribute("dept");				// destroy session of user
    session.removeAttribute("administrationErrorLogin");		// destroy session of user
 //	session.removeAttribute("NotAccepted");				// destroy session of user
 	session.removeAttribute("Error");

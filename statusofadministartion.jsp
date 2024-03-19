@@ -71,9 +71,7 @@
                                                 <nav>
                                                     <ul id="navigation">
                                                         <li class="active"><a href="administration_dashboard.jsp">Home</a></li>
-                                                        <li><a href="./statusofadministartion.jsp">Cases solved</a>
-                                                            
-                                                        </li>
+                                    
                                                         
                                                         <!-- Button -->
                                                         <li class="button-header"><a href="administration_logout.jsp" class="btn btn3">Log Out</a></li>
@@ -105,15 +103,15 @@
                                         <div class="hero__caption">
                                             <h1 data-animation="fadeInLeft" data-delay="0.2s">Welcome<br>
                                                 <% out.println(session.getAttribute("administration")); %>
-                                               
                                             </h1>
-                                            <p> Department of <% out.println(session.getAttribute("dept")); %></p>
+                                            <p data-animation="fadeInLeft">  Achievement department of  <% out.println(session.getAttribute("dept")); %> are</p>
+                                            
                                               
                       
               
             </main>
             <div class="section-top-border" width="10000px">
-                <h3 class="mb-30 request">Pending Requests:</h3>
+                <h3 class="mb-30 request">Achievements </h3>
                 
                     <div class="progress-table" width="5000px">
                         <form class="form-default" action="adminstration_problems_approved.jsp" method="POST">
@@ -139,7 +137,7 @@
                                                 
                                                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
                                                 Statement statement = connection.createStatement();
-                                                PreparedStatement  pst =  connection.prepareStatement("SELECT * FROM problems  where dept = ? and isApproved=0 ");
+                                                PreparedStatement  pst =  connection.prepareStatement("SELECT * FROM problems  where dept = ? and isApproved=1");
                                                 pst.setString(1, (String)session.getAttribute("dept"));
 
                                                 ResultSet resultSet = pst.executeQuery();
@@ -161,7 +159,7 @@
                                                             
                                                         <img src="data:image/jpeg;base64,<%= base64Image %>" alt="Image" width="120px" class="roll_no"/>
                                                         
-                                                        <div class="accept"><input type="checkbox" name="selectedIds" value="<%= resultSet.getInt(1)%>"></div>
+                                                        <!-- <div class="accept"><input type="checkbox" name="selectedIds" value="<%= resultSet.getInt(1)%>"></div> -->
                                                     </div>
                                         <%
                                                 }
@@ -171,12 +169,12 @@
                                             }
                                             
                                         %>
-                                        <div class="form-input pt-30 request">
+                                        <!-- <div class="form-input pt-30 request">
                                             <input class="genric-btn primary-border" type="submit" name="accept" value="Accept Request">
                                         </div>
                                         <div class="form-input pt-30 request">
                                             <input class="genric-btn primary-border" type="submit" name="reject" value="Delete Requests">
-                                        </div>
+                                        </div> -->
                                       
                         </form>
                        

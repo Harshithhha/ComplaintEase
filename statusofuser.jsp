@@ -120,6 +120,7 @@
                 <!-- Header End -->
             </header>
             <main>
+                  
                 <!--? slider Area Start-->
                 <section class="slider-area ">
                     <div class="slider-active">
@@ -131,7 +132,7 @@
                                         <div class="hero__caption">
                                             <h1 data-animation="fadeInLeft" data-delay="0.2s">Welcome<br>
                                                 <% out.println(session.getAttribute("user")); %>
-                                                <!-- <% out.println(session.getAttribute("roll_no")); %> -->
+                                                 <% out.println(session.getAttribute("roll_no")); %>
                                                         </div>
                                     </div>
                                 </div>
@@ -140,126 +141,140 @@
                     </div>
                 </section>
             </main>
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="login-form reg">
-                    <!-- logo-login -->
-                    <div class="logo-login">
-                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
-                    </div>
-                    <h2>Raise your complaint Here!</h2>
-                    <p>*All fields are mandatory</p>
-
-                    <div class="form-input">
-                                    <select name="dept" id="dept" required>
-                        <option value=""> Select department </option>
-                                    <option value="Water">Water </option>
-                                    <option value="Street Lights">Street Lights</option>
-                                    <option value="Electricity">Electricity</option>
-                                    <option value="Drainage">Drainage</option>
-                                    <option value="Garbage">Garbage</option>
-                                    <option value="Others">Others</option>
-
-
-                            <div class="form-input">
-                                <input type="text" name="address" id="address" placeholder="Address"  title="Location" required>
-                            </div>
+        </main>
+        <div class="section-top-border" width="10000px">
+            <h3 class="mb-30 request">Your problems are sent .Administration will be taking action </h3>
             
-                            <div class="form-input">
-                                <input type="des" id="des" name="des" placeholder="Raise complaint"  title="Description" required>
+                <div class="progress-table" width="5000px">
+                    <form class="form-default" action="adminstration_problems_approved.jsp" method="POST">
+                        <div class="table-head">
+                            <div class="roll_no">Description</div>
+                            <div class="name">Address</div>
+
+                            <div class="accept">Proof</div>
+                        </div>
+                                   
+                                    <%@ page import="java.sql.*" %>
+                                    <%@ page import="java.io.*" %>
+                                   
+                                    <%@ page import="java.util.Base64" %>
+
+                                    <%
+                                        String url = "jdbc:mysql://your_mysql_server:3306/your_database";
+                                        String user = "your_username";
+                                        String password = "your_password";
+                                        Connection  connection = null;
+                                        try {
+                                            Class.forName("com.mysql.jdbc.Driver");
+                                            
+                                            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
+                                            Statement statement = connection.createStatement();
+                                            PreparedStatement  pst =  connection.prepareStatement("SELECT * FROM problems  where isApproved=0 and user_id = ?");
+                                            pst.setString(1, (String)session.getAttribute("roll_no"));
+
+                                            ResultSet resultSet = pst.executeQuery();
+                                            
+                                             //statement.executeQuery("SELECT * FROM problems");
+                                            while (resultSet.next()) {                                      
+                                                String dept = resultSet.getString("dept");
+                                                String address = resultSet.getString("Location");
+                                                String des = resultSet.getString("des");
+                                                Blob blob = resultSet.getBlob("image");
+                                                byte[] imageData = blob.getBytes(1, (int) blob.length());
+                                                String base64Image = Base64.getEncoder().encodeToString(imageData);
+                                                
+                                    %>
+                                                <div class="ml-5000 mr-4000">
+                                                    <div class="table-row">
+                                                        
+                                                        <div class="roll_no"> <%= des %> </div>
+                                                        <div class="roll_no"> <%= address %></div>
+                                                        
+                                                    <img src="data:image/jpeg;base64,<%= base64Image %>" alt="Image" width="120px" class="roll_no"/>
+                                                    
+                                                    <!-- <div class="accept"><input type="checkbox" name="selectedIds" value="<%= resultSet.getInt(1)%>"></div> -->
+                                                </div>
+                                                </div>
+                                    <%
+                                            }
+                                            
+                                        } catch (ClassNotFoundException | SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                        
+                                    %>
+
+                    </form>
+                </div>
+            </div>
+
+<form action="">
+
+            <div class="section-top-border" width="10000px">
+                <h3 class="mb-30 request">Problems which are successfully addressed by the administartion </h3>
+                
+                    <div class="progress-table" width="5000px">
+                        <form class="form-default" action="" method="POST">
+                            <div class="table-head">
+                                <div class="roll_no">Description</div>
+                                <div class="name">Address</div>
+    
+                                <div class="accept">Proof</div>
                             </div>
-                    
-                        <label>Your Image File
-                            <input type="file" name="image" accept="image/*" required>
-                        </label>
-                            <div class="form-input pt-30">
-                                <input type = "submit" value = "Submit" />
-                            </div>
+                                       
+                                        <%@ page import="java.sql.*" %>
+                                        <%@ page import="java.io.*" %>
+                                       
+                                        <%@ page import="java.util.Base64" %>
+    
+                                        <%
+                                            //String url = "jdbc:mysql://your_mysql_server:3306/your_database";
+                                           // String user = "your_username";
+                                           // String password = "your_password";
+                                            //Connection  connection = null;
+                                            try {
+                                            //    Class.forName("com.mysql.jdbc.Driver");
+                                                
+                                              //  connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
+                                                Statement statement = connection.createStatement();
+                                                PreparedStatement  pst =  connection.prepareStatement("SELECT * FROM problems  where isApproved=1 and user_id = ?");
+                                                pst.setString(1, (String)session.getAttribute("roll_no"));
+    
+                                                ResultSet resultSet = pst.executeQuery();
+                                                
+                                                 //statement.executeQuery("SELECT * FROM problems");
+                                                while (resultSet.next()) {                                      
+                                                    String dept = resultSet.getString("dept");
+                                                    String address = resultSet.getString("Location");
+                                                    String des = resultSet.getString("des");
+                                                    Blob blob = resultSet.getBlob("image");
+                                                    byte[] imageData = blob.getBytes(1, (int) blob.length());
+                                                    String base64Image = Base64.getEncoder().encodeToString(imageData);
+                                                    
+                                        %>
+                                                    <div class="ml-5000 mr-4000">
+                                                        <div class="table-row">
+                                                            
+                                                            <div class="roll_no"> <%= des %> </div>
+                                                            <div class="roll_no"> <%= address %></div>
+                                                            
+                                                        <img src="data:image/jpeg;base64,<%= base64Image %>" alt="Image" width="120px" class="roll_no"/>
+                                                        
+                                                        <!-- <div class="accept"><input type="checkbox" name="selectedIds" value="<%= resultSet.getInt(1)%>"></div> -->
+                                                    </div>
+                                                    </div>
+                                        <%
+                                                }
+                                                
+                                            } catch ( SQLException e) {
+                                                e.printStackTrace();
+                                            }
+                                            
+                                        %>
+    
+                        </form>
                     </div>
                 </div>
-            </form>
-            <%@ page import="java.sql.*" %>
-<%@ page import="org.apache.commons.fileupload.FileItem" %>
-<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
-<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
-<%@ page import="org.apache.commons.io.IOUtils" %>
-<%@ page import="java.util.List" %>
-
-
-<%
-
-
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-     String user_id = (String)session.getAttribute("roll_no");   
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-        
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
-
-        if (ServletFileUpload.isMultipartContent(request)) {
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-
-            try {
-                List<FileItem> items = upload.parseRequest(request);
-                String dept = null;
-                String address = null;
-                String des = null;
-                byte[] image = null;
-
-                for (FileItem item : items) {
-                    if (item.isFormField()) {
-                        if ("address".equals(item.getFieldName())) {
-                            address = item.getString("UTF-8");
-                        } else if ("des".equals(item.getFieldName())) {
-                            des = item.getString("UTF-8");
-                        }
-                        else if ("dept".equals(item.getFieldName())) {
-                            dept = item.getString("UTF-8");
-                        }
-                    } else {
-                        image = item.get();
-                    }
-                }
-
-                // Insert data into MySQL
-                String sql = "INSERT INTO problems (dept, Location,des, image,user_id) VALUES (?,?, ?, ?, ?)";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, dept);
-                preparedStatement.setString(2, address);
-                preparedStatement.setString(3, des);
-                preparedStatement.setBytes(4, image);
-                preparedStatement.setString(5, user_id);
-                preparedStatement.executeUpdate();
-
-                out.println("<p>Request has been sent!</p>");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        // Close resources
-        try {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-%>
-           
-            
-
-            
-
-
             <footer>
                 <div class="footer-wrappper footer-bg">
                     <!-- Footer Start-->

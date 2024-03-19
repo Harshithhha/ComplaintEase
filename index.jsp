@@ -64,7 +64,7 @@
                                                     <ul class="submenu">
                                                         <li><a href="user_login.jsp">user</a></li>
                                                         <li><a href="administration_login.jsp">administration</a></li>
-                                                      
+
                                                     </ul>
                                                 </li>
                                                 <li><a href="#">Register</a>
@@ -100,7 +100,7 @@
                             <div class="col-xl-6 col-lg-7 col-md-12">
                                 <div class="hero__caption">
                                     <h1 data-animation="fadeInLeft" data-delay="0.2s"><br>ComplainEase</h1>
-                                    <p style="font: size 100px;"  data-animation="fadeInLeft" data-delay="0.4s"><br>Your journey to better health continues</p>
+                                    <p style="font: size 100px;"  data-animation="fadeInLeft" data-delay="0.4s"><br>Make the public safe with your one valuable complaint</p>
                                 </div>
                             </div>
                         </div>

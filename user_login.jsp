@@ -121,6 +121,8 @@
 		{
 			
             session.setAttribute("user",rs.getString(2));
+            session.setAttribute("roll_no",no);
+            
             response.sendRedirect("user_dashboard.jsp");
 			
 		}
